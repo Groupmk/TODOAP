@@ -1,9 +1,9 @@
 import React from "react";
 import TaskFilter from "../tasksfilter/tasksfilter";
-const Footer = () => {
+const Footer = ({ totalCount }) => {
   return (
     <footer className="footer">
-      <span className="todo-count">1 items left(!!!)</span>
+      <span className="todo-count">{ totalCount } left(!!!)</span>
       < TaskFilter />
     </footer>
   );

@@ -1,50 +1,26 @@
 import React, { Component } from "react";
 
 export default class Task extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false,
-    };
-  }
-
-  componentDidMount() {
-    const element = document.querySelector(".description");
-    element.addEventListener("click", this.handleClick);
-  }
-
-  componentWillUnmount() {
-    const element = document.querySelector(".description");
-    element.removeEventListener("click", this.handleClick);
-  }
-
-  handleClick = () => {
-    this.setState((prevState) => ({
-      checked: !prevState.checked,
-    }));
-  };
-
   render() {
-    const { label, important = false } = this.props;
-    const { checked } = this.state;
+    const { label, onDeleted, onToggleDone, done } = this.props;
 
-    const style = {
-      textDecoration: checked ? "line-through" : "none",
-      importantDecoration: important ? "line-through" : "none",
-    };
-
+    let condition = "condition";
+    if (done) condition = "completed";
     return (
-      <div className="view">
-        <input className="toggle" type="checkbox" onChange={ this.handleClick } />
+      <li className={condition}>
+           <div className="view">
+        <input className="toggle" type="checkbox"  onChange={onToggleDone}
+            checked={done} />
         <label>
-          <span className="description" style={style}>
+            <span className="description" onClick={ onToggleDone }>
             {label}
-          </span>
+        </span>
           <span className="created">5 min ago</span>
         </label>
         <button className="icon icon-edit"></button>
-        <button className="icon icon-destroy"></button>
+        <button className="icon icon-destroy" onClick={ onDeleted }></button>
       </div>
+      </li>
     );
   }
 }
