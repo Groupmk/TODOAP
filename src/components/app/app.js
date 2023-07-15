@@ -4,9 +4,9 @@ import TaskList from "../tasklist/tasklist";
 import Footer from "../footer/footer";
 const App = () => {
   const taskData = [
-    { label: "Drink Coffe", important: false, condition: "completed" },
-    { label: "Make Awesome App", important: true, condition: "" },
-    { label: "Have a lunch", important: false, condition: "editing" },
+    { label: "Drink Coffe", important: false, condition: "completed", id: 1},
+    { label: "Make Awesome App", important: true, condition: "", id: 2 },
+    { label: "Have a lunch", important: false, condition: "editing", id: 3 },
   ];
 
   return (
