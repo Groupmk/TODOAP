@@ -1,21 +1,25 @@
 import React, {Component} from "react";
 
 export default class TaskFilter extends Component {
+    clearCompleted = () => {
+        this.props.clearCompleted();
+    }
     render() {
+        const { filter, setFilter } = this.props;
         return (
             <div className="footer">
                 <ul className="filters">
                     <li>
-                        <button className="selected">All</button>
+                        <button className="selected" filter = {filter} onClick={() => setFilter("all")}>All</button>
                     </li>
                     <li>
-                        <button>Active</button>
+                        <button filter = {filter} onClick={() => setFilter("active")}>Active</button>
                     </li>
                     <li>
-                        <button>Completed</button>
+                        <button filter = {filter} onClick={() => setFilter("completed")}>Completed</button>
                     </li>
                 </ul>
-                <button className="clear-completed">Clear completed</button>
+                <button className="clear-completed" onClick={ this.clearCompleted}>Clear completed</button>
             </div>
         );
     }

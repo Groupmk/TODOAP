@@ -6,7 +6,7 @@ const TaskList = ({ todos, onDeleted, onToggleDone }) => {
     const { id, condition, ...props } = item;
 
     return (
-       <Task {...props} id = {id} condition = {condition}
+       <Task {...props} key = {id} condition = {condition}
         onDeleted = {() => onDeleted(id)}
         onToggleDone = {() => onToggleDone(id)}/>
     );
