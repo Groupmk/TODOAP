@@ -6,7 +6,6 @@ import Footer from "../footer/footer";
 export default class App extends Component {
   maxId = Math.random()
     state = {
-      originalTaskData: [],
       taskData: [],
       filter: "all"
     }
@@ -29,7 +28,8 @@ export default class App extends Component {
         important: false,
         id: this.maxId++,
         condition: "",
-        done: false
+        done: false,
+        createdDate: new Date()
       }
       this.setState(({ taskData }) => {
         const newArray = [

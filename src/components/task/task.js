@@ -1,9 +1,27 @@
 import React, { Component } from "react";
+import { formatDistanceToNow } from 'date-fns';
+
 
 export default class Task extends Component {
+  state = {
+    formattedDistance: ''
+  };
+  intervalId = null; 
+  componentDidMount() {
+    this.updateFormattedDistance(); 
+    this.intervalId = setInterval(this.updateFormattedDistance, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalId); 
+  }
+  updateFormattedDistance = () => {
+    const { createdDate } = this.props;
+    const formattedDistance = formatDistanceToNow(createdDate, { addSuffix: true });
+    this.setState({ formattedDistance });
+  }
   render() {
     const { label, onDeleted, onToggleDone, done } = this.props;
-
+    const { formattedDistance } = this.state;
     let condition = "condition";
     if (done) condition = "completed";
     return (
@@ -15,7 +33,7 @@ export default class Task extends Component {
             <span className="description" onClick={ onToggleDone }>
             {label}
         </span>
-          <span className="created">5 min ago</span>
+          <span className="created">{formattedDistance}</span>
         </label>
         <button className="icon icon-edit"></button>
         <button className="icon icon-destroy" onClick={ onDeleted }></button>
