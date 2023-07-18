@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Task from '../task/task';
 
-const TaskList = ({
-  todos, onDeleted, onToggleDone, onItemEdit,
-}) => {
+const TaskList = ({ todos, onDeleted, onToggleDone, onItemEdit }) => {
   const elements = todos.map((item) => {
     const { id, condition, ...props } = item;
 
@@ -17,13 +16,10 @@ const TaskList = ({
         onToggleDone={() => onToggleDone(id)}
         onItemEdit={(text) => onItemEdit(id, text)}
       />
-
     );
   });
 
-  return (
-     <ul className="todo-list">{elements}</ul>
-  );
+  return <ul className="todo-list">{elements}</ul>;
 };
 TaskList.defaultProps = {
   onDeleted: () => {},

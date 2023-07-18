@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import AppHeader from '../header';
 import TaskList from '../tasklist/tasklist';
 import Footer from '../footer/footer';
@@ -14,10 +15,7 @@ export default class App extends Component {
   deletItem = (id) => {
     this.setState(({ taskData }) => {
       const idx = taskData.findIndex((item) => item.id === id);
-      const newArray = [
-        ...taskData.slice(0, idx),
-        ...taskData.slice(idx + 1),
-      ];
+      const newArray = [...taskData.slice(0, idx), ...taskData.slice(idx + 1)];
       localStorage.removeItem(id);
       return {
         taskData: newArray,
@@ -26,19 +24,17 @@ export default class App extends Component {
   };
 
   onItemAdded = (text) => {
+    if (text.trim() === '') return;
     const newItem = {
       label: text,
       important: false,
-      id: this.maxId + 1,
+      id: this.maxId++,
       condition: '',
       done: false,
       createdDate: new Date(),
     };
     this.setState(({ taskData }) => {
-      const newArray = [
-        ...taskData,
-        newItem,
-      ];
+      const newArray = [newItem, ...taskData];
       localStorage.setItem(newItem.id, newItem.label);
       return {
         taskData: newArray,
@@ -54,11 +50,7 @@ export default class App extends Component {
       ...oldItem,
       [propName]: !oldItem[propName],
     };
-    return [
-      ...arr.slice(0, idx),
-      newItem,
-      ...arr.slice(idx + 1),
-    ];
+    return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
   };
 
   onToggleDone = (id) => {
@@ -127,12 +119,12 @@ export default class App extends Component {
       <section className="todoapp">
         <AppHeader onItemAdded={this.onItemAdded} />
         <section className="main">
-        <TaskList
-          todos={filteredTasks}
-          onDeleted={this.deletItem}
-          onToggleDone={this.onToggleDone}
-          onItemEdit={this.onItemEdit}
-        />
+          <TaskList
+            todos={filteredTasks}
+            onDeleted={this.deletItem}
+            onToggleDone={this.onToggleDone}
+            onItemEdit={this.onItemEdit}
+          />
           <Footer
             totalCount={totalCount}
             doneCount={doneCount}

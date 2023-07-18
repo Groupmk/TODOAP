@@ -34,14 +34,16 @@ export default class NewTaskForm extends Component {
 
   render() {
     return (
-    <form className="new-todo" onSubmit={ this.onSubmit}>
-    <input autoFocus
-    className="new-todo"
-    type="text"
-    placeholder="What needs to be done?"
-    value = { this.state.label }
-    onChange={ this.onLableChange }/>
-    </form>
+      <form className="new-todo" onSubmit={this.onSubmit}>
+        <input
+          autoFocus
+          className="new-todo"
+          type="text"
+          placeholder="What needs to be done?"
+          value={this.state.label}
+          onChange={this.onLableChange}
+        />
+      </form>
     );
   }
 }

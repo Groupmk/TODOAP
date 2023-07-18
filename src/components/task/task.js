@@ -54,9 +54,7 @@ export default class Task extends Component {
   };
 
   render() {
-    const {
-      label, onDeleted, onToggleDone, done,
-    } = this.props;
+    const { label, onDeleted, onToggleDone, done } = this.props;
     const { formattedDistance, editing } = this.state;
     let condition = 'condition';
     if (done) condition = 'completed';
@@ -65,12 +63,7 @@ export default class Task extends Component {
       return (
         <li className={condition}>
           <div className="view">
-            <input
-              className="toggle"
-              type="checkbox"
-              onChange={onToggleDone}
-              checked={done}
-            />
+            <input className="toggle" type="checkbox" onChange={onToggleDone} checked={done} />
             <input
               className="edit-label"
               value={this.state.label}
@@ -89,17 +82,9 @@ export default class Task extends Component {
     return (
       <li className={condition}>
         <div className="view">
-          <input
-            className="toggle"
-            type="checkbox"
-            onChange={onToggleDone}
-            checked={done}
-          />
+          <input className="toggle" type="checkbox" onChange={onToggleDone} checked={done} />
           <label>
-            <span
-              className="description"
-              onClick={onToggleDone}
-            >
+            <span className="description" onClick={onToggleDone}>
               {label}
             </span>
             <span className="created">{formattedDistance}</span>
