@@ -48,8 +48,10 @@ export default class Task extends Component {
   };
 
   handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.keyCode === 13) {
       this.finishEditing();
+    } else if (e.keyCode === 27) {
+      this.setState({ editing: false });
     }
   };
 
@@ -73,7 +75,7 @@ export default class Task extends Component {
                 const newLabel = e.target.value;
                 this.setState({ label: newLabel });
               }}
-              onKeyPress={this.handleKeyPress}
+              onKeyDown={this.handleKeyPress}
             />
           </div>
         </li>
