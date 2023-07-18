@@ -1,18 +1,39 @@
-import React from "react";
-import Task from "../task/task";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Task from '../task/task';
 
-const TaskList = ({ todos, onDeleted, onToggleDone }) => {
+const TaskList = ({
+  todos, onDeleted, onToggleDone, onItemEdit,
+}) => {
   const elements = todos.map((item) => {
     const { id, condition, ...props } = item;
 
     return (
-       <Task {...props} key = {id} condition = {condition}
-        onDeleted = {() => onDeleted(id)}
-        onToggleDone = {() => onToggleDone(id)}/>
+      <Task
+        {...props}
+        key={id}
+        condition={condition}
+        onDeleted={() => onDeleted(id)}
+        onToggleDone={() => onToggleDone(id)}
+        onItemEdit={(text) => onItemEdit(id, text)}
+      />
+
     );
   });
 
-  return <ul className="todo-list">{elements}</ul>;
+  return (
+     <ul className="todo-list">{elements}</ul>
+  );
+};
+TaskList.defaultProps = {
+  onDeleted: () => {},
+  onToggleDone: () => {},
+  onItemEdit: () => {},
+};
+TaskList.propTypes = {
+  onDeleted: PropTypes.func,
+  onToggleDone: PropTypes.func,
+  onItemEdit: PropTypes.func,
 };
 
 export default TaskList;

@@ -1,3 +1,4 @@
-import AppHeader from "./header";
-import "./header.css";
+import AppHeader from './header';
+import './header.css';
+
 export default AppHeader;
