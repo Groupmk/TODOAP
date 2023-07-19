@@ -21,12 +21,21 @@ const TaskList = ({ todos, onDeleted, onToggleDone, onItemEdit }) => {
 
   return <ul className="todo-list">{elements}</ul>;
 };
+
 TaskList.defaultProps = {
   onDeleted: () => {},
   onToggleDone: () => {},
   onItemEdit: () => {},
 };
+
 TaskList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      condition: PropTypes.string,
+      // Остальные необходимые свойства
+    })
+  ).isRequired,
   onDeleted: PropTypes.func,
   onToggleDone: PropTypes.func,
   onItemEdit: PropTypes.func,

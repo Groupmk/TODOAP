@@ -5,8 +5,7 @@ import TaskList from '../tasklist/tasklist';
 import Footer from '../footer/footer';
 
 export default class App extends Component {
-  maxId = Math.random();
-
+  maxId = 100;
   state = {
     taskData: [],
     filter: 'all',
@@ -14,9 +13,7 @@ export default class App extends Component {
 
   deletItem = (id) => {
     this.setState(({ taskData }) => {
-      const idx = taskData.findIndex((item) => item.id === id);
-      const newArray = [...taskData.slice(0, idx), ...taskData.slice(idx + 1)];
-      localStorage.removeItem(id);
+      const newArray = taskData.filter((item) => item.id !== id);
       return {
         taskData: newArray,
       };
@@ -35,28 +32,31 @@ export default class App extends Component {
     };
     this.setState(({ taskData }) => {
       const newArray = [newItem, ...taskData];
-      localStorage.setItem(newItem.id, newItem.label);
       return {
         taskData: newArray,
       };
     });
   };
 
-  // eslint-disable-next-line class-methods-use-this
-  toggleProperty = (arr, id, propName) => {
-    const idx = arr.findIndex((item) => item.id === id);
-    const oldItem = arr[idx];
-    const newItem = {
-      ...oldItem,
-      [propName]: !oldItem[propName],
-    };
-    return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
+  toggleProperty = (id, propName) => {
+    this.setState(({ taskData }) => {
+      const newArray = taskData.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            [propName]: !item[propName],
+          };
+        }
+        return item;
+      });
+      return {
+        taskData: newArray,
+      };
+    });
   };
 
   onToggleDone = (id) => {
-    this.setState(({ taskData }) => ({
-      taskData: this.toggleProperty(taskData, id, 'done'),
-    }));
+    this.toggleProperty(id, 'done');
   };
 
   setFilter = (filter) => {
@@ -82,9 +82,6 @@ export default class App extends Component {
   clearCompleted = () => {
     this.setState(({ taskData }) => {
       const newArray = taskData.filter((item) => !item.done);
-      newArray.forEach((item) => {
-        localStorage.removeItem(item.id);
-      });
       return {
         taskData: newArray,
       };
@@ -93,18 +90,17 @@ export default class App extends Component {
 
   onItemEdit = (id, text) => {
     this.setState(({ taskData }) => {
-      const updatedTaskData = taskData.map((task) => {
-        if (task.id === id) {
+      const newArray = taskData.map((item) => {
+        if (item.id === id) {
           return {
-            ...task,
+            ...item,
             label: text,
           };
         }
-        return task;
+        return item;
       });
-      localStorage.setItem(id, text);
       return {
-        taskData: updatedTaskData,
+        taskData: newArray,
       };
     });
   };
