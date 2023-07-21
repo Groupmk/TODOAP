@@ -69,7 +69,7 @@ export default class Task extends Component {
             <input
               className="edit-label"
               value={this.state.label}
-              autoFocus
+              autoFocus={true}
               onBlur={this.finishEditing}
               onChange={(e) => {
                 const newLabel = e.target.value;
@@ -84,7 +84,7 @@ export default class Task extends Component {
     return (
       <li className={condition}>
         <div className="view">
-          <input className="toggle" type="checkbox" onChange={onToggleDone} checked={done} />
+          <input className="toggle" type="checkbox" onChange={onToggleDone} checked={done} autoFocus={true} />
           <label>
             <span className="description" onClick={onToggleDone}>
               {label}
