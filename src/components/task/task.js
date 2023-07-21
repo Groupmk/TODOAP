@@ -52,11 +52,11 @@ export default class Task extends Component {
       this.finishEditing();
     } else if (e.keyCode === 27) {
       this.setState({ editing: false });
-      this.setState({ label: '' });
+      this.setState({ label: this.props.label });
     }
   };
   hendleBlur = () => {
-    this.setState({ label: '' });
+    this.setState({ label: this.props.label });
     this.setState({ editing: false });
   };
 
