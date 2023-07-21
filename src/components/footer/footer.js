@@ -5,12 +5,11 @@ import TaskFilter from '../tasksfilter/tasksfilter';
 
 const Footer = ({ totalCount, doneCount, filter, setFilter, clearCompleted }) => (
   <footer className="footer">
-    <span className="todo-count">
-      {totalCount} incomplete {doneCount} completed
-    </span>
+    <span className="todo-count">{doneCount} completed</span>
     <TaskFilter filter={filter} setFilter={setFilter} clearCompleted={clearCompleted} />
   </footer>
 );
+
 Footer.propTypes = {
   totalCount: PropTypes.node,
   doneCount: PropTypes.node,
@@ -18,4 +17,5 @@ Footer.propTypes = {
   setFilter: PropTypes.func.isRequired,
   clearCompleted: PropTypes.func.isRequired,
 };
+
 export default Footer;

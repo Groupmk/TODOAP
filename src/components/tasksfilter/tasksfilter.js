@@ -11,17 +11,17 @@ export default class TaskFilter extends Component {
       <div className="footer">
         <ul className="filters">
           <li>
-            <button className="selected" filter={filter} onClick={() => setFilter('all')}>
+            <button className={filter === 'all' ? 'selected' : ''} onClick={() => setFilter('all')}>
               All
             </button>
           </li>
           <li>
-            <button filter={filter} onClick={() => setFilter('active')}>
+            <button className={filter === 'active' ? 'selected' : ''} onClick={() => setFilter('active')}>
               Active
             </button>
           </li>
           <li>
-            <button filter={filter} onClick={() => setFilter('completed')}>
+            <button className={filter === 'completed' ? 'selected' : ''} onClick={() => setFilter('completed')}>
               Completed
             </button>
           </li>

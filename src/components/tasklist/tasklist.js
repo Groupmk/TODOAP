@@ -33,7 +33,6 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       condition: PropTypes.string,
-      // Остальные необходимые свойства
     })
   ).isRequired,
   onDeleted: PropTypes.func,
