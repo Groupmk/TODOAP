@@ -54,6 +54,9 @@ export default class Task extends Component {
       this.setState({ editing: false });
     }
   };
+  hendleBlur = () => {
+    this.setState({ editing: false });
+  };
 
   render() {
     const { label, onDeleted, onToggleDone, done } = this.props;
@@ -70,7 +73,7 @@ export default class Task extends Component {
               className="edit-label"
               value={this.state.label}
               autoFocus={true}
-              onBlur={this.finishEditing}
+              onBlur={this.hendleBlur}
               onChange={(e) => {
                 const newLabel = e.target.value;
                 this.setState({ label: newLabel });
